@@ -24,12 +24,10 @@ exports.findAll = async (req, res, next) => {
         const { name } = req.query;
         if (name) {
             document = await contactService.findByName(name);
-            // http://localhost:3000/api/contacts?name=Anh
         } else {
             document = await contactService.find({});
-           // http://localhost:3000/api/contacts
         }
-
+        
     } catch (error){
         return next(
             new ApiError(500, "An error occurred while retrieving contacts!")
@@ -38,7 +36,6 @@ exports.findAll = async (req, res, next) => {
     return res.send(document);
 };
 
-//  Find a single contact with an id
 exports.findOne = async (req, res, next) => {
     try {
         const contactService = new ContactService(MongoDB.client);
@@ -55,7 +52,7 @@ exports.findOne = async (req, res, next) => {
     }
     
 };
-// Update a contact by id in the request
+
 exports.update = async (req, res, next) => {
     if (Object.keys(req.body).length === 0) {
         return res.status(400).send({ message: "Data to update can not be empty!" });
@@ -75,7 +72,6 @@ exports.update = async (req, res, next) => {
     }
 };
 
-// Delete a contact with the specified id in the request
 exports.delete = (_req, res, next) => {
     try {
         const contactService = new ContactService(MongoDB.client);
@@ -89,7 +85,6 @@ exports.delete = (_req, res, next) => {
     }
 }
 
-// Find all favorite contacts of a user
 exports.findAllFavorite = async (req, res, next) => {
     try {
         const contactService = new ContactService(MongoDB.client);
@@ -115,5 +110,3 @@ exports.deleteAll = async (_req, res, next) => {
         );
     }
 };
-
-module.exports = ContactService;
