@@ -3,14 +3,14 @@ const cors = require("cors");
 const ApiError = require("./app/api-error");
 
 const app = express();
-const contactsRouter = require("./app/routes/contact.route");
+const booksRouter = require("./app/routes/book.route");
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/contacts", contactsRouter);
+app.use("/api/books", booksRouter);
 
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to contact book application." });
+    res.json({ message: "Chao mung den voi he thong quan ly muon sach" });
 });
 
 app.use((req, res, next) => {
